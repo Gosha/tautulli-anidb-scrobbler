@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  tautulli:
+    restart: always
+    image: tautulli-auto-stuff:latest
+
+    ports:
+      - 8181:8181
+
+    volumes:
+      # Optional: Set your Plex logs folder to use Tautulli as a log viewer.
+      # Plex logs are not needed for Tautulli to function. A complete folder
+      # path is required, shortcuts are not recognized, and the logs must be
+      # accessible from the machine where Tautulli is installed.
+      # https://support.plex.tv/articles/200250417-plex-media-server-log-files/
+      # - /mnt/c/Users/gosha/AppData/Local/Plex Media Server/Logs:/plex_logs:ro
+
+      - tautulli-data:/config
+
+      # Mounted in the same place as docker-rtorrent
+      - /mnt/d/Data:/data
+
+    environment:
+      - TZ=Europe/Stockholm
+      # Put in .env
+      - ANIDB_USERNAME=${ANIDB_USERNAME}
+      - ANIDB_PASSWORD=${ANIDB_PASSWORD}
+      - PLEX_USER=${PLEX_USER}
+
+volumes:
+  tautulli-data:
