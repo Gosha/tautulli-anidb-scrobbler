@@ -28,12 +28,6 @@ PLEX_USER = os.environ["PLEX_USER"]
 TAUTULLI_URL = os.environ.get("TAUTULLI_URL", "http://localhost:8181")
 TAUTULLI_APIKEY = getTautulliApikey()
 
-print("ANIDB_USERNAME: " + ANIDB_USERNAME)
-print("ANIDB_PASSWORD: " + ANIDB_PASSWORD)
-print("PLEX_USER: " + PLEX_USER)
-print("TAUTULLI_URL: " + TAUTULLI_URL)
-print("TAUTULLI_APIKEY: " + TAUTULLI_APIKEY)
-
 # Maybe pass this as an argument in the future
 # AGENT_ID = 6  # The PlexPy notifier agent id found here: https://github.com/JonnyWong16/plexpy/blob/master/API.md#notify
 
