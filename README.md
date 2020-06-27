@@ -1,6 +1,6 @@
 # Tautilli Anidb scrobbler
 
-> Auto scrobble to anidb with Tautilli notifications
+> Auto scrobble to anidb using Tautilli notification agents
 
 # Build docker image
 
