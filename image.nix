@@ -1,6 +1,13 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs ? import <nixpkgs> { }, hasKvm ? true }:
 let
-  buildImage = pkgs.dockerTools.buildImage;
+  buildImage = if hasKvm then
+    pkgs.dockerTools.buildImage
+  else
+    (pkgs.callPackage <nixpkgs/pkgs/build-support/docker> {
+      vmTools = pkgs.callPackage <nixpkgs/pkgs/build-support/vm> {
+        pkgs = pkgs // { qemu_kvm = pkgs.callPackage ./wrapped-qemu.nix { }; };
+      };
+    }).buildImage;
   pullImage = pkgs.pullImage;
 in buildImage {
   name = "tautulli-auto-stuff";
