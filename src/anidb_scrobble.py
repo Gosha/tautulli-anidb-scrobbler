@@ -57,12 +57,14 @@ def main(p):
         # send_notification("Failed to scrobble", "Couldn't log in")
         sys.exit(1)
 
+    filename = p.filename.replace("D:\\Data", "/data").replace("\\", "/")
+
     try:
-        for file in pyanidb.hash.hash_files([p.filename]):
+        for file in pyanidb.hash.hash_files([filename]):
             fid = (file.size, file.ed2k)
             a.add_file(fid, viewed=True, retry=True)
     except pyanidb.AniDBUnknownFile:
-        # send_notification("Failed to scrobble", "Unknown file: {}".format(p.filename))
+        # send_notification("Failed to scrobble", "Unknown file: {}".format(filename))
         sys.exit(1)
     except Exception as e:
         # send_notification(
