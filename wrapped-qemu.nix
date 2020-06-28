@@ -2,7 +2,7 @@
 with pkgs;
 stdenv.mkDerivation {
   name = "wrapped-qemu";
-  # Remove first two arguments from qemu-kwm, namely "-host cpu"
+  # Remove first two arguments from qemu-kvm, namely "-host cpu"
   buildCommand = ''
     mkdir -p $out/bin
 
