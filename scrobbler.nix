@@ -12,5 +12,7 @@ in pythonPackages.buildPythonApplication {
 
   propagatedBuildInputs = [ pythonPackages.requests pyanidb ];
 
+  makeWrapperArgs = [ "--unset PYTHONPATH" ];
+
   src = ./src;
 }
