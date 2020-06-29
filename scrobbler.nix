@@ -2,7 +2,7 @@
 let
   # customPkgs = import ../private-nix { }; # For local development
   customPkgs = import (fetchTarball
-    "https://github.com/Gosha/private-nixpkgs/archive/0f6f8ce11f73e79a650c7c4b3ae3c388b3dd2c02.tar.gz")
+    "https://github.com/Gosha/private-nixpkgs/archive/a4b31d0e45c7e7e2d8393d438122250cf0eaca62.tar.gz")
     { };
   pythonPackages = pkgs.python3Packages;
   pyanidb = customPkgs.pyanidb;
