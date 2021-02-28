@@ -27,22 +27,23 @@ ANIDB_PASSWORD = os.environ["ANIDB_PASSWORD"]
 PLEX_USER = os.environ["PLEX_USER"]
 TAUTULLI_URL = os.environ.get("TAUTULLI_URL", "http://localhost:8181")
 TAUTULLI_APIKEY = getTautulliApikey()
-
-# Maybe pass this as an argument in the future
-# AGENT_ID = 6  # The PlexPy notifier agent id found here: https://github.com/JonnyWong16/plexpy/blob/master/API.md#notify
+# Can be seen under settings -> notification agents -> agent -> popup header
+NOTIFIER_ID = os.environ.get("NOTIFIER_ID", None)
 
 
 ### CODE BELOW ###
 
-# def send_notification(subject, body):
-#     params = {'apikey': TAUTULLI_APIKEY,
-#               'cmd': 'notify',
-#               'agent_id': AGENT_ID,
-#               'subject': subject,
-#               'body': body}
+def send_notification(subject, body):
+    if not NOTIFIER_ID:
+        return
 
-#     print("Sending notification:\n{}\n=====\n{}".format(subject, body))
-#     r = requests.post(TAUTULLI_URL.rstrip('/') + '/api/v2', params=params)
+    params = {'apikey': TAUTULLI_APIKEY,
+              'cmd': 'notify',
+              'notifier_id': NOTIFIER_ID,
+              'subject': subject,
+              'body': body}
+    print("Sending notification:\n{}\n=====\n{}".format(subject, body))
+    r = requests.post(TAUTULLI_URL.rstrip('/') + '/api/v2', params=params)
 
 
 def main(p):
@@ -54,7 +55,7 @@ def main(p):
         a.auth()
         print("Logged in to anidb")
     except:
-        # send_notification("Failed to scrobble", "Couldn't log in")
+        send_notification("Failed to scrobble", "Couldn't log in")
         sys.exit(1)
 
     filename = p.filename.replace("D:\\Data", "/data").replace("\\", "/")
@@ -64,16 +65,16 @@ def main(p):
             fid = (file.size, file.ed2k)
             a.add_file(fid, viewed=True, retry=True)
     except pyanidb.AniDBUnknownFile:
-        # send_notification("Failed to scrobble", "Unknown file: {}".format(filename))
+        send_notification("Failed to scrobble", "Unknown file: {}".format(filename))
         sys.exit(1)
     except Exception as e:
-        # send_notification(
-        #     "Failed to scrobble",
-        #     "Unknown error: {}\nFile: {}".format(e.__class__.__name__, p.filename),
-        # )
+        send_notification(
+            "Failed to scrobble",
+            "Unknown error: {}\nFile: {}".format(e.__class__.__name__, p.filename),
+        )
         sys.exit(1)
 
-    # send_notification("Scrobbled", "File: {}".format(p.filename))
+    send_notification("Scrobbled", "File: {}".format(p.filename))
 
 
 if __name__ == "__main__":
