@@ -19,7 +19,7 @@ services:
       - tautulli-data:/config
 
       # Mounted in the same place as docker-rtorrent
-      - /mnt/d/Data:/data
+      - /home/gosha/Anime:/home/gosha/Anime
 
     environment:
       - TZ=Europe/Stockholm
