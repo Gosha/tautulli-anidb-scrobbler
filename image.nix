@@ -34,7 +34,7 @@ in buildImage {
       "PYTHONIOENCODING=UTF-8"
     ];
     Cmd = [ "${pkgs.tautulli}/bin/tautulli" "--datadir" "/config" ];
-    ExposedPortsiy = { "3000/tcp" = { }; };
+    ExposedPorts = { "8181/tcp" = { }; };
     Healthcheck = {
       # https://github.com/Tautulli/Tautulli/blob/7f178e091349a1399395c1ac3227d6f0fa801efc/Dockerfile#L23
       Test = [
