@@ -2,7 +2,7 @@
 
 > Auto scrobble to anidb using Tautilli notification agents
 
-# Build docker image
+## Build docker image
 
 With KVM enabled OS:
 
@@ -21,3 +21,7 @@ With remote builder
 ```bash
 ./remote-builder.sh
 ```
+
+## Updating
+
+Run build command and then `docker-compose up -d`
