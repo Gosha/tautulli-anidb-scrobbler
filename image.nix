@@ -38,7 +38,9 @@ in buildImage {
     Healthcheck = {
       # https://github.com/Tautulli/Tautulli/blob/7f178e091349a1399395c1ac3227d6f0fa801efc/Dockerfile#L23
       Test = [
-        "CMD-SHELL"
+        "CMD"
+        "${pkgs.bash}/bin/bash"
+        "-c"
         "curl -ILfSs http://localhost:8181/status > /dev/null || curl -ILfkSs https://localhost:8181/status > /dev/null || exit 1"
       ];
       StartPeriod = 90000000000;
