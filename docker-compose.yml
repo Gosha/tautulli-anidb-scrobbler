@@ -27,6 +27,7 @@ services:
       - ANIDB_USERNAME=${ANIDB_USERNAME}
       - ANIDB_PASSWORD=${ANIDB_PASSWORD}
       - PLEX_USER=${PLEX_USER}
+      - NOTIFIER_ID=${NOTIFIER_ID}
 
 volumes:
   tautulli-data:
