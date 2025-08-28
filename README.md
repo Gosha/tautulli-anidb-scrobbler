@@ -25,3 +25,24 @@ With remote builder
 ## Updating
 
 Run build command and then `docker-compose up -d`
+
+## Configuration
+### Web UI
+Add a script notification agent to `/scripts`, `./anidb_scrobble.sh`, with *Watched* script arguments:
+
+```
+--media_type {media_type} --library_name {library_name} --filename {filename} --user_name {username}
+```
+
+### .env
+```sh
+ANIDB_USERNAME=
+ANIDB_PASSWORD=
+PLEX_USER=
+# Supply mount points for shows. These two should have the same value
+MOUNT_DIR_HOST=/home/...
+MOUNT_DIR_CONTAINER=/home/...
+# If you want notifications about scrobble status,
+# Create another notification agent, and set the ID here
+NOTIFIER_ID=
+```
